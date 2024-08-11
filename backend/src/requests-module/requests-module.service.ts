@@ -48,16 +48,27 @@ export class RequestsService {
     }
   }
 
-  async submitResult(requestId: string, result: string, secret: string) {
+  async submitResults(
+    resultsData: { requestId: string; result: string }[],
+    secret: string,
+  ) {
     if (secret !== process.env.AI_SECRET) {
       throw new UnauthorizedException();
     }
-    const request = await this.requestsRepository.findOne({
-      where: { id: +requestId },
-    });
-    request.status = 'completed';
-    request.result = result;
-    await this.requestsRepository.save(request);
+
+    for (const { requestId, result } of resultsData) {
+      const request = await this.requestsRepository.findOne({
+        where: { id: +requestId },
+      });
+
+      if (!request) {
+        throw new NotFoundException(`Request with ID ${requestId} not found`);
+      }
+
+      request.status = 'completed';
+      request.result = result;
+      await this.requestsRepository.save(request);
+    }
   }
 
   async getResult(requestId: string) {

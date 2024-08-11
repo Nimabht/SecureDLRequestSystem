@@ -27,12 +27,12 @@ export class RequestsController {
   }
 
   @Post('submit-result')
-  async submitResult(@Body() resultData) {
-    return this.requestsService.submitResult(
-      resultData.requestId,
-      resultData.result,
-      resultData.secret,
-    );
+  async submitResults(
+    @Req() req,
+    @Body('resultsData') resultsData: { requestId: string; result: string }[],
+  ) {
+    const secret = req.headers.authorization.split(' ')[1];
+    return this.requestsService.submitResults(resultsData, secret);
   }
 
   @UseGuards(JwtAuthGuard)
