@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RequestEntity } from 'src/Model/request.entity';
@@ -21,15 +25,32 @@ export class RequestsService {
 
   async getNextRequest(secret: string) {
     if (secret !== process.env.AI_SECRET) {
-      throw new Error('Unauthorized');
+      throw new UnauthorizedException();
     }
-    const requestId = await this.rabbitMQService.consume('requests');
-    return this.requestsRepository.findOne({ where: { id: +requestId } });
+    try {
+      const requestId = await this.rabbitMQService.consume('requests');
+      const request = await this.requestsRepository.findOne({
+        where: { id: +requestId },
+      });
+
+      if (!request) {
+        throw new NotFoundException('Request not found');
+      }
+
+      request.status = 'processing';
+      await this.requestsRepository.save(request);
+
+      return request;
+    } catch (error) {
+      if (error === 'No messages in queue') {
+        throw new NotFoundException('No messages in queue');
+      }
+    }
   }
 
   async submitResult(requestId: string, result: string, secret: string) {
     if (secret !== process.env.AI_SECRET) {
-      throw new Error('Unauthorized');
+      throw new UnauthorizedException();
     }
     const request = await this.requestsRepository.findOne({
       where: { id: +requestId },
@@ -40,6 +61,10 @@ export class RequestsService {
   }
 
   async getResult(requestId: string) {
-    return this.requestsRepository.findOne({ where: { id: +requestId } });
+    const request = await this.requestsRepository.findOne({
+      where: { id: +requestId },
+    });
+
+    if (!request) throw new NotFoundException();
   }
 }

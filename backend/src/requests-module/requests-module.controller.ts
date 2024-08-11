@@ -20,8 +20,9 @@ export class RequestsController {
     return this.requestsService.createRequest(req.user.userId, prompt);
   }
 
-  @Post('fetch-requests')
-  async fetchRequest(@Body('secret') secret: string) {
+  @Get('fetch-requests')
+  async fetchRequest(@Req() req) {
+    const secret = req.headers.authorization.split(' ')[1];
     return this.requestsService.getNextRequest(secret);
   }
 
