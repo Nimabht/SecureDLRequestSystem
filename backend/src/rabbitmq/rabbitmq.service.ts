@@ -4,7 +4,6 @@ import * as amqp from 'amqplib';
 @Injectable()
 export class RabbitMQService {
   private channel: amqp.Channel;
-  //   'amqp://localhost';
   async connect() {
     const connection = await amqp.connect(process.env.RABBITMQ_URL);
     this.channel = await connection.createChannel();
