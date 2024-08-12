@@ -214,9 +214,6 @@ version: "3.8"
 services:
   backend:
     image: secure-dl-backend
-    build:
-      context: .
-      dockerfile: ./backend/Dockerfile
     ports:
       - "3000:3000"
     volumes:
@@ -243,9 +240,6 @@ services:
 
   frontend:
     image: secure-dl-frontend
-    build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
     ports:
       - "4173:4173"
     environment:
