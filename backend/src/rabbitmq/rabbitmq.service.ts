@@ -26,7 +26,7 @@ export class RabbitMQService {
     if (!this.channel) {
       throw new Error('RabbitMQ channel is not initialized');
     }
-    console.log(`Publishing message to queue: ${queue}`, message); // Log the message
+    console.log(`Publishing message to queue: ${queue}`, message);
     this.channel.sendToQueue('requests', Buffer.from(message));
   }
 

@@ -3,3 +3,5 @@ backend/yarn-error.log
 backend/dist
 backend/db.sqlite
 backend/.env
+secrets/cert.pem
+secrets/key.pem
