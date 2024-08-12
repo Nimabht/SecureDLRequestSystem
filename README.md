@@ -2,7 +2,6 @@
 
 Secure DL Request System is a full-stack application designed to handle prompt requests to a simulated deep learning model. It is built with a NestJS backend and a Vite-React frontend, using TailwindCSS for styling.
 
-
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -19,7 +18,7 @@ Secure DL Request System is a full-stack application designed to handle prompt r
   - [Authentication Endpoints](#authentication-endpoints)
   - [Client Request Endpoints](#client-request-endpoints)
   - [Model Request Endpoints](#model-request-endpoints)
-- [Docker](#docker) 
+- [Docker](#docker)
 - [Contributing](#contributing)
 - [Author](#author)
 
@@ -47,7 +46,7 @@ The Secure DL Request System consists of two main components:
 - **Prompt Handling**: Processes prompt requests through a simulated deep learning model, managing the queue and storing results.
 - **Security**: All endpoints are secured using JWT tokens.
 - **Dockerized**: Both the backend and frontend are containerized using Docker, enabling easy deployment and consistent environment setup across different systems.
-
+- **Advanced Logging System**: Implements a structured logging system that records access, errors, info, and debug logs. Logs are automatically zipped daily to optimize storage, with a clear and organized log structure.
 
 ### Endpoints
 
@@ -80,17 +79,19 @@ The backend provides several endpoints for user authentication and managing prom
 - **Submit request result**
   - `POST /v1/requests/submit-result`
 
-
 ### Detailed documentations:
 
 ### OpenAPI
+
 ##### [SecureDLRequestSystem.openapi.json](https://github.com/user-attachments/files/16592581/SecureDLRequestSystem.openapi.json)
+
 ### Swagger
+
 ##### [SecureDLRequestSystem.swagger.json](https://github.com/user-attachments/files/16592587/SecureDLRequestSystem.swagger.json)
+
 ### Apidog
+
 ##### [SecureDLRequestSystem.apidog.json](https://github.com/user-attachments/files/16592591/SecureDLRequestSystem.apidog.json)
-
-
 
 ## Frontend
 
@@ -103,12 +104,16 @@ The backend provides several endpoints for user authentication and managing prom
 ## Demo images
 
 ### Login page
-![image](https://github.com/user-attachments/assets/b7654865-58b6-4dad-8c48-9fb74ee642f1)
-### Signup page
-![image](https://github.com/user-attachments/assets/33fe8c48-7149-4747-928a-dc105d1a43d2)
-### Dashboard page
-![image](https://github.com/user-attachments/assets/383b4ea0-4e83-4039-9bd1-0379415790f7)
 
+![image](https://github.com/user-attachments/assets/b7654865-58b6-4dad-8c48-9fb74ee642f1)
+
+### Signup page
+
+![image](https://github.com/user-attachments/assets/33fe8c48-7149-4747-928a-dc105d1a43d2)
+
+### Dashboard page
+
+![image](https://github.com/user-attachments/assets/383b4ea0-4e83-4039-9bd1-0379415790f7)
 
 ## Installation
 
@@ -119,6 +124,7 @@ To set up the project locally, follow these steps:
 1. Clone the repository.
 2. Navigate to the backend directory.
 3. Set .env file:
+
 ```
 GOOGLE_CLIENT_ID=<google client id>
 GOOGLE_CLIENT_SECRET=<google secret>
@@ -133,6 +139,7 @@ AVAILABLE_LOGS=error,access,debug,info  #error,access,debug,info
 LOGGER_CONSOLE_ENB=true   #true/false to log in the console
 LOG_PATH=logs/  #path to save the logs
 ```
+
 4. Install the dependencies using `npm install`.
 5. Start the backend server using `npm run start:dev`.
 
@@ -141,6 +148,7 @@ LOG_PATH=logs/  #path to save the logs
 1. Navigate to the frontend directory.
 2. Install the dependencies using `npm install`.
 3. Set .env file:
+
 ```
 VITE_BACKEND_URL=<backend url like http://localhost:3000>
 VITE_HTTPS_ENABLED=<true/false>
@@ -148,6 +156,7 @@ SSL_KEY_PATH=<key.pm path if https enabled>
 SSL_CERT_PATH=<cert.pem path if https enabled>
 
 ```
+
 4. Start the frontend server using `npm run dev`.
 
 ## Usage
@@ -168,8 +177,8 @@ SSL_CERT_PATH=<cert.pem path if https enabled>
 - **Fetch Next Request**: The simulated deep learning model can fetch the next prompt request from the queue.
 - **Submit Result**: After processing a prompt, the model submits the result back to the backend.
 
-
 ## Docker
+
 To simplify deployment and ensure consistency across different environments, the Secure DL Request System is fully containerized. This section explains how to build Docker images for both the backend and frontend, and how to run the entire system using Docker Compose.
 
 ### Building Docker Images
@@ -179,21 +188,25 @@ First, navigate to the root directory of the project where your Dockerfiles are 
 #### Backend
 
 Build the Docker image for the backend:
-   ```bash
-   docker build -t secure-dl-backend -f ./backend/Dockerfile .
-   ```
+
+```bash
+docker build -t secure-dl-backend -f ./backend/Dockerfile .
+```
+
 #### Frontend
 
 Build the Docker image for the frontend:
-   ```bash
-   docker build -t secure-dl-frontend -f ./frontend/Dockerfile .
-   ```
-   
+
+```bash
+docker build -t secure-dl-frontend -f ./frontend/Dockerfile .
+```
+
 ### Running with Docker Compose
+
 To manage both the backend and frontend services together, you can use Docker Compose. Below is the docker-compose.yml configuration file.
 
 ```yml
-version: '3.8'
+version: "3.8"
 
 services:
   backend:
@@ -243,17 +256,12 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
 ```
-
-
 
 ## Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-
 ## Author
 
 - [@Nimabht](https://github.com/Nimabht)
-
