@@ -62,7 +62,8 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Post('validate')
-  async validate(@Body('token') token: string) {
+  async validate(@Req() req) {
+    const token = req.headers.authorization.split(' ')[1];
     const user = await this.authService.validateToken(token);
     const { password, ...otherFields } = user;
     return otherFields;
