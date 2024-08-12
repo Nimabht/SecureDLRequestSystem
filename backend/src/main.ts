@@ -21,6 +21,13 @@ async function bootstrap() {
     app = await NestFactory.create(AppModule);
   }
 
+  // Enable CORS for all origins
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
+
   await app.listen(3000, () => {
     console.log(
       `[🔥] App is listening on 3000... (${
