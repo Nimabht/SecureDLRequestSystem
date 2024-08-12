@@ -15,7 +15,7 @@ import { User } from 'src/Model/user.entity';
 import { GoogleAuthGuard } from './utils/google-auth.guard';
 import { ConfigService } from '@nestjs/config';
 
-@Controller('auth')
+@Controller('v1/auth')
 export class AuthController {
   constructor(
     private authService: AuthService,

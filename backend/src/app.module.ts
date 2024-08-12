@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './user/users.module';
-import { AuthModule } from './auth/auth.module';
-import { RequestsModule } from './requests-module/requests-module.module';
+import { UsersModule } from './api/v1/user/users.module';
+import { AuthModule } from './api/v1/auth/auth.module';
+import { RequestsModule } from './api/v1/requests-module/requests-module.module';
 import { AppService } from './app.service';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionFilter } from './middlewares/GlobalExceptionFilter';

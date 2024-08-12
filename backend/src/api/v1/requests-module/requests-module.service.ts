@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RequestEntity } from 'src/Model/request.entity';
-import { RabbitMQService } from '../rabbitmq/rabbitmq.service';
+import { RabbitMQService } from 'src/rabbitmq/rabbitmq.service';
 
 @Injectable()
 export class RequestsService {

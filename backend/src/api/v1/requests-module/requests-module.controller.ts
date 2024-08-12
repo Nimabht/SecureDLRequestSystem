@@ -10,7 +10,7 @@ import {
 import { JwtAuthGuard } from '../auth/utils/jwt-auth.guard';
 import { RequestsService } from './requests-module.service';
 
-@Controller('/requests')
+@Controller('v1/requests')
 export class RequestsController {
   constructor(private readonly requestsService: RequestsService) {}
 
