@@ -7,8 +7,6 @@ dotenv.config(); // Load environment variables from .env
 
 async function bootstrap() {
   let app;
-  const port = process.env.PORT || 3000;
-  console.log(port);
   // Check if HTTPS is enabled in the environment variables
   if (process.env.HTTPS_ENABLED === 'true') {
     const httpsOptions = {
@@ -23,9 +21,9 @@ async function bootstrap() {
     app = await NestFactory.create(AppModule);
   }
 
-  await app.listen(port, () => {
+  await app.listen(3000, () => {
     console.log(
-      `[🔥] App is listening on ${port}... (${
+      `[🔥] App is listening on 3000... (${
         process.env.HTTPS_ENABLED === 'true' ? 'HTTPS' : 'HTTP'
       })`,
     );
