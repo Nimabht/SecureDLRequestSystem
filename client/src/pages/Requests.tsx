@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import { FaArrowRight } from "react-icons/fa";
 
 interface Request {
   id: number;
@@ -15,7 +13,6 @@ interface Request {
 
 const Requests: React.FC = () => {
   const [requests, setRequests] = useState<Request[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRequests = async () => {

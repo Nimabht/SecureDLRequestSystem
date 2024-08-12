@@ -1,9 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 
 const NavBar: React.FC = () => {
   const [showTextArea, setShowTextArea] = useState(false);
@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/v1/requests/submit-request`,
         { prompt },
         {

@@ -1,6 +1,6 @@
-import React, { useState, FormEvent } from "react";
+import axios from "axios";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GoogleSVG from "../assets/GoogleSVG";
