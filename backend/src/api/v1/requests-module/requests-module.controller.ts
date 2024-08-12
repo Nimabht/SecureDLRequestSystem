@@ -40,4 +40,11 @@ export class RequestsController {
   async getResult(@Param('requestId') requestId: string) {
     return this.requestsService.getResult(requestId);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('user-requests')
+  async getUserRequests(@Req() req) {
+    const userId = req.user.userId;
+    return this.requestsService.getUserRequests(userId);
+  }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/api/v1/user/users.service';
 import * as bcrypt from 'bcrypt';
@@ -54,9 +54,13 @@ export class AuthService {
     password: string,
     email?: string,
   ): Promise<User> {
-    const existingUser = await this.usersService.findOneByUsername(username);
-    if (existingUser) {
-      throw new Error('User already exists');
+    const existingUserWithDuplicatedUsername =
+      await this.usersService.findOneByUsername(username);
+    const existingUserWithDuplicatedEmail =
+      await this.usersService.findOneByEmail(email);
+
+    if (existingUserWithDuplicatedUsername || existingUserWithDuplicatedEmail) {
+      throw new BadRequestException('User already exists');
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await this.usersService.createUser(
@@ -64,7 +68,8 @@ export class AuthService {
       hashedPassword,
       email,
     );
-    return newUser;
+    const { password: _, ...userWithoutPassword } = newUser;
+    return userWithoutPassword;
   }
 
   async validateToken(token: string): Promise<User> {

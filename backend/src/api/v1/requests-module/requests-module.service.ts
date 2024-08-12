@@ -78,4 +78,8 @@ export class RequestsService {
 
     if (!request) throw new NotFoundException();
   }
+
+  async getUserRequests(userId: string) {
+    return this.requestsRepository.find({ where: { userId } });
+  }
 }
