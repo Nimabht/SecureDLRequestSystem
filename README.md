@@ -2,6 +2,9 @@
 
 Secure DL Request System is a full-stack application designed to handle prompt requests to a simulated deep learning model. It is built with a NestJS backend and a Vite-React frontend, using TailwindCSS for styling.
 
+https://github.com/user-attachments/assets/0ad9a2fe-c9b5-47ba-befd-e07bb83973a5
+
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
