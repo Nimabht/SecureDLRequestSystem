@@ -201,7 +201,12 @@ docker build -t secure-dl-backend -f ./backend/Dockerfile .
 Build the Docker image for the frontend:
 
 ```bash
-docker build -t secure-dl-frontend -f ./frontend/Dockerfile .
+docker build \
+  --build-arg VITE_BACKEND_URL=http://localhost:3000 \
+  --build-arg VITE_HTTPS_ENABLED=<true/false> \
+  --build-arg SSL_KEY_PATH=/path/to/ssl/key.pem \
+  --build-arg SSL_CERT_PATH=/path/to/ssl/cert.pem \
+  -f secure-dl-frontend ./frontend/Dockerfile .
 ```
 
 ### Running with Docker Compose
