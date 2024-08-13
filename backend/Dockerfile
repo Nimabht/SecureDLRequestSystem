@@ -1,6 +1,6 @@
 FROM node:20.2.0-alpine
 
-WORKDIR /opt/secure-dlr-request-system
+WORKDIR /app
 
 COPY package*.json ./
 
